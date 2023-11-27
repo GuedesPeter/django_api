@@ -6,14 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello world!</h1>
+    <h1>CRUD em Django</h1>
 
     <ul>
         {% for pessoa in pessoas %}
-            <li>{{ pessoa.id }} - {{ pessoa.nome }}</li>
-        {% endfor %}
+            <li>{{ pessoa.id }} - {{ pessoa.nome }} - 
+            <a href="{% url 'editar' pessoa.id %}">Editar - </a>
+            <a href="{% url 'deletar' pessoa.id %}">Deletar</a>
+            </li>
+        {% endfor %}    
     </ul>
 
+    <form action="{% url 'salvar' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="nome">
+        <button type="submit">Salvar</button>
+    </form>
     
 </body>
 </html>
